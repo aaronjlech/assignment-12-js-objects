@@ -330,37 +330,71 @@ console.assert( flippedUsers[2].croissant === 'favoriteFood' )
 // exactly how you should write the method. Including the period!
 
 
-
 var politeObject = {
-    name: "Frank"
-   politeObject.personalize = function(helloWorld){
-      return "Hi, my name is " + this[name] + ", and the result is " + tellEm
-
-
-
-   }
+    name: "Frank",
+    personalize: function(func){
+   return "Hi, my name is " + this.name + ", and the result is " + func() + "."
+}
 }
 
 var tellEm = function() {
     return "I know what is going on here"
 }
 
-var personalizedResult = politeObject.personalize(helloWorld)
-console.assert( personalizedResult === "Hi, my name is Frank, and the \
-    result is I know what is going on here." )
+var promoteJS = function(){
+   return "JavaScript is quite amazing"
+}
+
+var personalizedResult = politeObject.personalize(tellEm)
+var anotherPersonalNote = politeObject.personalize(promoteJS)
+
+console.assert( personalizedResult === "Hi, my name is Frank, and the result is I know what is going on here." )
+console.assert( anotherPersonalNote === "Hi, my name is Frank, and the result is JavaScript is quite amazing." )
 
  //  you may need to use the special `this` keyword for this problem.
 
 
- // Part 10
-
+ // part 10
+ //
  // Write a function where() that takes two inputs, a list of objects and
  // a properties object. It should return a new list containing only those
  // objects that meet the key-value conditions in the properties object.
 
+var where = function(arrOfObj, fullObj){
+               var simplifiedList = []
+
+   for(var i = 0; i < arrOfObj.length; i++){
+         var hasAllPropValues = true
+         var singleObj = arrOfObj[i]
+
+
+         for(var prop in fullObj){
+
+            if(fullObj[prop] != singleObj[prop]){
+
+               hasAllPropValues = false
+            }
+
+         }
+
+         if(hasAllPropValues === true){
+            matchingObj = singleObj
+
+            simplifiedList.push(matchingObj)
+
+         }
+
+
+   }
+   return simplifiedList
+
+}
+
  var plays = [
      { title: "Cymbeline", author: "Shakespeare", year: 1623 },
      { title: "The Tempest", author: "Shakespeare", year: 1623 },
+     { title: "Some Shitty Poem", author: "TS Eliot", year: 1623 },
+     { title: "Seventeenth Century Religion", author: "Canterbury", year: 1623 },
      { title: "Hamlet", author: "Shakespeare", year: 1603 },
      { title: "A Midsummer Night's Dream", author: "Shakespeare", year: 1600 },
      { title: "Macbeth", author: "Shakespeare", year: 1620 },
